@@ -13,7 +13,9 @@ COPY --from=build /app/target/amenal-back-end-hosted-0.0.1-SNAPSHOT.jar amenal-b
 EXPOSE 8080
 
 # Copy the init.sql file into the container
-COPY init.sql /init.sql
+FROM library/postgres
+COPY init.sql /docker-entrypoint-initdb.d/
+
 
 # Start the Spring Boot application
 CMD ["java", "-jar", "amenal-back-end-hosted.jar"]
