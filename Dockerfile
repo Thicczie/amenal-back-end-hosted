@@ -3,7 +3,8 @@ FROM maven:3.8.5-openjdk-17 AS build
 WORKDIR /app
 COPY . .
 
-RUN mvn clean package -DskipTests
+RUN mvn clean package -DskipTests && ls /app/target
+
 
 # Stage 2: Create the final image with the built JAR file
 FROM openjdk:17.0.1-jdk-slim
